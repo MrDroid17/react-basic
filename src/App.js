@@ -35,10 +35,20 @@ class App extends Component {
     })
   }
   render() {
+    const buttonStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      boxShadow: '0 2px 3px blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
     return (
       <div className="App">
         <p>This is really working</p>
-        <button onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button>
+        <button
+          style={buttonStyle}
+          onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
