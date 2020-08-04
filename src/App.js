@@ -22,7 +22,9 @@ class App extends Component {
         { name: newName, age: 28, profession: "I am Senior Software Engg by profession." },
         { name: "Mohit", age: 32, profession: "I am assistant Professor by profession." },
         { name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
-      ]
+      ],
+      otherState: 'Some Other state',
+      showPerson: false
     })
   }
   inputPersonHandler = (event) => {
@@ -33,6 +35,10 @@ class App extends Component {
         { name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
       ]
     })
+  }
+  togglePersonFunction = () => {
+    const toggle = this.state.showPersons;
+    this.setState({ showPersons: !toggle });
   }
   render() {
     const buttonStyle = {
@@ -49,17 +55,25 @@ class App extends Component {
         <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
-        <Person
-          name={this.state.persons[1].name}
-          changed={this.inputPersonHandler}
-          age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
-        <Person
-          name={this.state.persons[2].name}
-          click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
-          age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person>
+        <button
+          style={buttonStyle}
+          onClick={this.togglePersonFunction}>toggle persons</button>
+        {
+          this.state.showPersons ?
+            <div>
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
+              <Person
+                name={this.state.persons[1].name}
+                changed={this.inputPersonHandler}
+                age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
+              <Person
+                name={this.state.persons[2].name}
+                click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
+                age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person>
+            </div> : null
+        }
       </div>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
