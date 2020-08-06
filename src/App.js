@@ -24,7 +24,7 @@ class App extends Component {
         { name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
       ],
       otherState: 'Some Other state',
-      showPerson: false
+      showPersons: false
     })
   }
   inputPersonHandler = (event) => {
@@ -49,6 +49,28 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+
+    let persons = null;
+    
+    if(this.state.showPersons){
+      persons =(
+        <div>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
+        <Person
+          name={this.state.persons[1].name}
+          changed={this.inputPersonHandler}
+          age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
+        <Person
+          name={this.state.persons[2].name}
+          click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
+          age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person>
+        </div> 
+      )
+    }
+
+
     return (
       <div className="App">
         <p>This is really working</p>
@@ -58,22 +80,8 @@ class App extends Component {
         <button
           style={buttonStyle}
           onClick={this.togglePersonFunction}>toggle persons</button>
-        {
-          this.state.showPersons ?
-            <div>
-              <Person
-                name={this.state.persons[0].name}
-                age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
-              <Person
-                name={this.state.persons[1].name}
-                changed={this.inputPersonHandler}
-                age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
-              <Person
-                name={this.state.persons[2].name}
-                click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
-                age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person>
-            </div> : null
-        }
+        {persons}
+        
       </div>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
