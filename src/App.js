@@ -9,30 +9,35 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      { name: "Sobhit", age: 24, profession: "I am Software Engg by profession." },
-      { name: "Mohit", age: 30, profession: "I am Teacher by profession." },
-      { name: "Arpit", age: 29, profession: "I am Interior Designer by profession." },
+      { id: "id_001", name: "Sobhit", age: 24, profession: "I am Software Engg by profession." },
+      { id: "id_002", name: "Mohit", age: 30, profession: "I am Teacher by profession." },
+      { id: "id_003", name: "Arpit", age: 29, profession: "I am Interior Designer by profession." },
     ],
     otherState: "additional Info..."
   }
 
-  updatePersonHandler = (newName) => {
+  updatePersonHandler = (event, id) => {
+    const personsIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    })
+    const person = { ...this.state.persons[personsIndex] };
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personsIndex] = person;
+
     this.setState({
-      persons: [
-        { name: newName, age: 28, profession: "I am Senior Software Engg by profession." },
-        { name: "Mohit", age: 32, profession: "I am assistant Professor by profession." },
-        { name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
-      ],
+      persons: persons,
       otherState: 'Some Other state',
-      showPersons: false
+      // showPersons: false
     })
   }
   inputPersonHandler = (event) => {
     this.setState({
       persons: [
-        { name: "Babloo", age: 28, profession: "I am Senior Software Engg by profession." },
-        { name: event.target.value, age: 32, profession: "I am assistant Professor by profession." },
-        { name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
+        { id: "id_001", name: "Babloo", age: 28, profession: "I am Senior Software Engg by profession." },
+        { id: "id_002", name: event.target.value, age: 32, profession: "I am assistant Professor by profession." },
+        { id: "id_003", name: "Arpit", age: 29, profession: "I am senior Interior Designer by profession." },
       ]
     })
   }
@@ -40,6 +45,15 @@ class App extends Component {
     const toggle = this.state.showPersons;
     this.setState({ showPersons: !toggle });
   }
+  deletePersonFunction = (personIndex) => {
+    const persons = [...this.state.persons]
+    // const persons = this.state.persons.slice();  // alternanate method to copy
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons })
+
+  }
+
+
   render() {
     const buttonStyle = {
       backgroundColor: 'white',
@@ -52,29 +66,33 @@ class App extends Component {
 
     let persons = null;
 
-    if(this.state.showPersons){
-      persons =(
+    if (this.state.showPersons) {
+      persons = (
         <div>
           {
-            this.state.persons.map(person =>{
-              return  <Person
-              name={person.name}
-              age={person.age}>{person.profession}</Person>
+            this.state.persons.map((person, index) => {
+              return <Person
+                click={() => this.deletePersonFunction(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.updatePersonHandler(event, person.id)}
+              >{person.profession}</Person>
             })
           }
           <h3>Above is dyanamic list</h3>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
-        <Person
-          name={this.state.persons[1].name}
-          changed={this.inputPersonHandler}
-          age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
-        <Person
-          name={this.state.persons[2].name}
-          click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
-          age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person>
-        </div> 
+          {/* <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
+          <Person
+            name={this.state.persons[1].name}
+            changed={this.inputPersonHandler}
+            age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
+          <Person
+            name={this.state.persons[2].name}
+            click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
+            age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person> */}
+        </div >
       )
     }
 
@@ -82,14 +100,14 @@ class App extends Component {
     return (
       <div className="App">
         <p>This is really working</p>
-        <button
+        {/* <button
           style={buttonStyle}
-          onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button>
+          onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
         <button
           style={buttonStyle}
           onClick={this.togglePersonFunction}>toggle persons</button>
         {persons}
-        
+
       </div>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
