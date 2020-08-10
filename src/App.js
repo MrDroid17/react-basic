@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import Radium, { StyleRoot } from 'radium';
 
 
 /**
@@ -56,12 +57,17 @@ class App extends Component {
 
   render() {
     const buttonStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       boxShadow: '0 2px 3px blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black',
+      }
     }
 
     let persons = null;
@@ -80,8 +86,8 @@ class App extends Component {
               >{person.profession}</Person>
             })
           }
-          <h3>Above is dyanamic list</h3>
-          {/* <Person
+          {/* <h3>Above is dyanamic list</h3>
+          <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
           <Person
@@ -93,28 +99,44 @@ class App extends Component {
             click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
             age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person> */}
         </div >
-      )
+      );
+      buttonStyle.backgroundColor = 'red';
+      buttonStyle[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
+
+    // const classes = ['red', 'bold'].join(' ');
+    const classes = [];
+
+    /**
+     * Add condition based styling
+     */
+    if (this.state.persons.length <= 2) classes.push('red');
+    if (this.state.persons.length <= 1) classes.push('bold');
 
 
     return (
-      <div className="App">
-        <p>This is really working</p>
-        {/* <button
+      <StyleRoot>
+        <div className="App">
+          <p className={classes.join(' ')}>This is really working</p>
+          {/* <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-        <button
-          style={buttonStyle}
-          onClick={this.togglePersonFunction}>toggle persons</button>
-        {persons}
+          <button
+            style={buttonStyle}
+            onClick={this.togglePersonFunction}>toggle persons</button>
+          {persons}
 
-      </div>
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
   }
 }
 
-export default App;
+export default Radium(App);
 
 /**
  * function based component with useState hook
