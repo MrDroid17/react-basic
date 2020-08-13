@@ -1,8 +1,21 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
-import Radium, { StyleRoot } from 'radium';
+import styled from 'styled-components';
 
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  boxShadow: 0 2px 3px blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgreen;
+    color: black;
+  }
+`;
 
 /**
  * Class based component with setState
@@ -118,25 +131,22 @@ class App extends Component {
 
 
     return (
-      <StyleRoot>
         <div className="App">
           <p className={classes.join(' ')}>This is really working</p>
           {/* <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-          <button
-            style={buttonStyle}
-            onClick={this.togglePersonFunction}>toggle persons</button>
+          <StyledButton
+            onClick={this.togglePersonFunction}>toggle persons</StyledButton>
           {persons}
 
         </div>
-      </StyleRoot>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
   }
 }
 
-export default Radium(App);
+export default App;
 
 /**
  * function based component with useState hook
