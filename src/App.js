@@ -4,7 +4,7 @@ import Person from './Person/Person'
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red': 'green'};
   color: white;
   font: inherit;
   border: 1px solid blue;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   padding: 8px;
   cursor: pointer;
   &:hover {
-    background-color: lightgreen;
+    background-color: ${props => props.alt ? 'salmon': 'lightgreen'};
     color: black;
   }
 `;
@@ -69,19 +69,6 @@ class App extends Component {
 
 
   render() {
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      boxShadow: '0 2px 3px blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      }
-    }
 
     let persons = null;
 
@@ -113,11 +100,6 @@ class App extends Component {
             age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person> */}
         </div >
       );
-      buttonStyle.backgroundColor = 'red';
-      buttonStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     // const classes = ['red', 'bold'].join(' ');
@@ -136,7 +118,7 @@ class App extends Component {
           {/* <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-          <StyledButton
+          <StyledButton alt={this.state.showPersons}
             onClick={this.togglePersonFunction}>toggle persons</StyledButton>
           {persons}
 
