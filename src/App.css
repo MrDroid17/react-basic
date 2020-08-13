@@ -14,3 +14,25 @@
 .bold{
   font-weight: 700;
 }
+
+.buttonStyle{
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  box-shadow: 0 2px 3px blue;
+  padding: 8px;
+  cursor: pointer;
+
+}
+
+.buttonStyle:hover {
+  background-color: lightgreen;
+  color: black;
+}
+.buttonStyle.red {
+  background-color: red;
+}
+.buttonStyle.red:hover {
+  background-color: salmon;
+}
