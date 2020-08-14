@@ -1,21 +1,7 @@
 import React, { Component, useState } from 'react';
-import './App.css';
+// import './App.css';
 import Person from './Person/Person'
-import styled from 'styled-components';
-
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red': 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  boxShadow: 0 2px 3px blue;
-  padding: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon': 'lightgreen'};
-    color: black;
-  }
-`;
+import styleClasses from './App.module.css'
 
 /**
  * Class based component with setState
@@ -69,7 +55,6 @@ class App extends Component {
 
 
   render() {
-
     let persons = null;
 
     if (this.state.showPersons) {
@@ -108,18 +93,18 @@ class App extends Component {
     /**
      * Add condition based styling
      */
-    if (this.state.persons.length <= 2) classes.push('red');
-    if (this.state.persons.length <= 1) classes.push('bold');
+    if (this.state.persons.length <= 2) classes.push(styleClasses.red);
+    if (this.state.persons.length <= 1) classes.push(styleClasses.bold);
 
 
     return (
-        <div className="App">
+        <div className={styleClasses.App}>
           <p className={classes.join(' ')}>This is really working</p>
           {/* <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-          <StyledButton alt={this.state.showPersons}
-            onClick={this.togglePersonFunction}>toggle persons</StyledButton>
+          <button className={styleClasses.buttonStyle}
+            onClick={this.togglePersonFunction}>toggle persons</button>
           {persons}
 
         </div>

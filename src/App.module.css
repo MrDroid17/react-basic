@@ -30,9 +30,9 @@
   background-color: lightgreen;
   color: black;
 }
-.buttonStyle.red {
+.buttonStyle.Red {
   background-color: red;
 }
-.buttonStyle.red:hover {
+.buttonStyle.Red:hover {
   background-color: salmon;
 }
