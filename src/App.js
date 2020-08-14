@@ -56,6 +56,7 @@ class App extends Component {
 
   render() {
     let persons = null;
+    let buttonClass = [styleClasses.buttonStyle];
 
     if (this.state.showPersons) {
       persons = (
@@ -85,6 +86,7 @@ class App extends Component {
             age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person> */}
         </div >
       );
+      buttonClass.push(styleClasses.Red);
     }
 
     // const classes = ['red', 'bold'].join(' ');
@@ -98,16 +100,16 @@ class App extends Component {
 
 
     return (
-        <div className={styleClasses.App}>
-          <p className={classes.join(' ')}>This is really working</p>
-          {/* <button
+      <div className={styleClasses.App}>
+        <p className={classes.join(' ')}>This is really working</p>
+        {/* <button
           style={buttonStyle}
           onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-          <button className={styleClasses.buttonStyle}
-            onClick={this.togglePersonFunction}>toggle persons</button>
-          {persons}
+        <button className={buttonClass.join(' ')}
+          onClick={this.togglePersonFunction}>toggle persons</button>
+        {persons}
 
-        </div>
+      </div>
     );
     // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
   }
