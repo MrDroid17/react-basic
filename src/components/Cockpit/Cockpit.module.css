@@ -1,0 +1,43 @@
+.App {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  background-color: black;
+  width:100vw;
+  height: 100vh;
+}
+
+.pointer{
+  cursor: pointer;
+  color: blue;
+}
+
+.red{
+  color:red;
+}
+
+.bold{
+  font-weight: 700;
+}
+
+.buttonStyle{
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  box-shadow: 0 2px 3px blue;
+  padding: 8px;
+  cursor: pointer;
+
+}
+
+.buttonStyle:hover {
+  background-color: lightgreen;
+  color: black;
+}
+.buttonStyle.Red {
+  background-color: red;
+}
+.buttonStyle.Red:hover {
+  background-color: salmon;
+}

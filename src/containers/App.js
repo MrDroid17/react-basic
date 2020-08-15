@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
 // import './App.css';
-import Person from './Person/Person'
-import styleClasses from './App.module.css'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import styleClasses from './App.module.css';
 
 /**
  * Class based component with setState
@@ -45,73 +46,36 @@ class App extends Component {
     const toggle = this.state.showPersons;
     this.setState({ showPersons: !toggle });
   }
+
   deletePersonFunction = (personIndex) => {
     const persons = [...this.state.persons]
     // const persons = this.state.persons.slice();  // alternanate method to copy
     persons.splice(personIndex, 1);
     this.setState({ persons: persons })
-
   }
-
 
   render() {
     let persons = null;
-    let buttonClass = [styleClasses.buttonStyle];
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {
-            this.state.persons.map((person, index) => {
-              return <Person
-                click={() => this.deletePersonFunction(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.updatePersonHandler(event, person.id)}
-              >{person.profession}</Person>
-            })
-          }
-          {/* <h3>Above is dyanamic list</h3>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}>{this.state.persons[0].profession}</Person>
-          <Person
-            name={this.state.persons[1].name}
-            changed={this.inputPersonHandler}
-            age={this.state.persons[1].age}>{this.state.persons[1].profession}</Person>
-          <Person
-            name={this.state.persons[2].name}
-            click={this.updatePersonHandler.bind(this, 'Sobhit AKA Babloo')}
-            age={this.state.persons[2].age}>{this.state.persons[2].profession}</Person> */}
-        </div >
-      );
-      buttonClass.push(styleClasses.Red);
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonFunction}
+        changed={this.updatePersonHandler}
+      />
     }
-
-    // const classes = ['red', 'bold'].join(' ');
-    const classes = [];
-
-    /**
-     * Add condition based styling
-     */
-    if (this.state.persons.length <= 2) classes.push(styleClasses.red);
-    if (this.state.persons.length <= 1) classes.push(styleClasses.bold);
-
 
     return (
       <div className={styleClasses.App}>
-        <p className={classes.join(' ')}>This is really working</p>
-        {/* <button
-          style={buttonStyle}
-          onClick={() => this.updatePersonHandler('Babloo!!')}>Update person</button> */}
-        <button className={buttonClass.join(' ')}
-          onClick={this.togglePersonFunction}>toggle persons</button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonFunction}
+        />
         {persons}
-
       </div>
+
     );
-    // return React.createElement('div', null, React.createElement('h1', null, 'Tell me about react.'))
   }
 }
 
