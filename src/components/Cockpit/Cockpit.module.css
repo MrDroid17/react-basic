@@ -41,3 +41,13 @@
 .buttonStyle.Red:hover {
   background-color: salmon;
 }
+
+.appTitle{
+  width: 400px;
+  padding: 10px;
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: 24px;
+  background-color: #ff8a80;
+  color: black;
+}

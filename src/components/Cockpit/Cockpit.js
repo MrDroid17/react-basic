@@ -12,9 +12,10 @@ const cockpit = (props) => {
 
   return (
     <div  >
+      <h4 className={styleClasses.appTitle}>{props.title}</h4>
       <p className={classes.join(' ')}>This is really working</p>
       <button className={buttonClass.join(' ')}
-        onClick={props.clicked}>toggle persons</button>
+        onClick={props.clicked}>Toggle persons</button>
     </div>
   )
 }

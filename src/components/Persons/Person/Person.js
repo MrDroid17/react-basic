@@ -5,7 +5,7 @@ const person = (props) => {
 
   return (
     <div className={styleClasses.person}>
-      <h4 onClick={props.click}>My name is <span className="pointer">{props.name}</span> Kumar. I am {props.age} years old.</h4>
+      <h4 onClick={props.click}>My name is <span className="pointer">{props.name}</span>. I am {props.age} years old.</h4>
       <p>{props.children}</p>
       <input type="text" onChange={props.changed} value={props.name}></input>
     </div>
