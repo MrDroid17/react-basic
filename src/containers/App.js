@@ -8,6 +8,13 @@ import styleClasses from './App.module.css';
  * Class based component with setState
  */
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor.');
+    /**
+     * State can be used  here if u are using constructor
+     */
+  }
   state = {
     persons: [
       { id: "id_001", name: "Sobhit", age: 24, profession: "I am Software Engg by profession." },
@@ -16,6 +23,18 @@ class App extends Component {
     ],
     otherState: "additional Info..."
   }
+
+
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps.', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount.');
+  }
+
 
   updatePersonHandler = (event, id) => {
     const personsIndex = this.state.persons.findIndex(p => {
@@ -55,6 +74,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render.');
     let persons = null;
 
     if (this.state.showPersons) {
