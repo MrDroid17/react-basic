@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styleClasses from './Cockpit.module.css'
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+  useEffect(()=> {
+    console.log('[Cockpit.js] useEffect');
+    /**
+     * You can Run Http request here.....
+     */
+    const timer = setTimeout(() => {
+      alert('Saved data to cloud!');
+    }, 1000);
+    return ()=>{
+      clearInterval(timer)
+      console.log('[Cockpit.js]  Clean up in use effects.');
+    }
+  }, []);
+  useEffect(()=> {
+    console.log('[Cockpit.js] 2nd useEffect');
+
+    return ()=>{
+      console.log('[Cockpit.js]  Clean up in 2nd use effects.');
+    }
+  });
+
   const classes = [];
   let buttonClass = [styleClasses.buttonStyle];
   if (props.showPersons) buttonClass.push(styleClasses.Red);
@@ -20,4 +41,4 @@ const cockpit = (props) => {
   )
 }
 
-export default cockpit;
+export default Cockpit;
